@@ -6,14 +6,12 @@ using System.Web.Mvc;
 
 namespace Magnets.Controllers
 {
-    public class HomeController : Controller
+    public class StartController : Controller
     {
         public ActionResult Index()
         {
             ViewBag.Message = "Ändern Sie diese Vorlage als Schnelleinstieg in Ihre ASP.NET MVC-Anwendung.";
-
-            // check
-
+            
             return View();
         }
 
