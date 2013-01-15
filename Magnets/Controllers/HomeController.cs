@@ -12,6 +12,8 @@ namespace Magnets.Controllers
         {
             ViewBag.Message = "Ändern Sie diese Vorlage als Schnelleinstieg in Ihre ASP.NET MVC-Anwendung.";
 
+            // check
+
             return View();
         }
 
