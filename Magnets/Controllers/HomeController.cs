@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Magnets.Controllers
 {
-    public class StartController : Controller
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {
