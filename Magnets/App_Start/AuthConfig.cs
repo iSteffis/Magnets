@@ -11,6 +11,7 @@ namespace Magnets
     {
         public static void RegisterAuth()
         {
+            //Hallo
             // Damit sich Benutzer dieser Website mithilfe ihrer Konten von anderen Websites (z. B. Microsoft, Facebook und Twitter) anmelden können,
             // müssen Sie diese Website aktualisieren. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=252166".
 
