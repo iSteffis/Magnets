@@ -17,7 +17,7 @@ namespace Magnets.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Tour()
         {
             ViewBag.Message = "Ihre App-Beschreibungsseite.";
 
