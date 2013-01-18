@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Magnets.Models.Community>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#draggable").draggable();
+        });
+        $("#droppable").droppable({
+            drop: function (event, ui) {
+                $(this)
+                  .addClass("ui-state-highlight")
+                  .find("p")
+                    .html("Dropped!");
+            }
+        });
+    </script>
+}
+
+<h2>Index</h2>
+
+<style>
+    #draggable {
+        width: 150px;
+        height: 150px;
+        padding: 0.5em;
+    }
+
+    #droppable {
+        width: 950px;
+        height: 500px;
+        float: left;
+        background: #fff;
+        float: left;
+    }
+</style>
+
+<div id="droppable" class="ui-widget-header">
+    <p>Drop here</p>
+</div>
+
+<div id="draggable" class="ui-widget-content">
+    <p>Drag me around</p>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Place)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Place)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CommunityID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.CommunityID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CommunityID })
+            </td>
+        </tr>
+    }
+
+</table>
