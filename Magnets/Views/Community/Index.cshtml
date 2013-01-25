@@ -9,12 +9,66 @@
         $(init);
 
         function init() {
-            $('#makeMeDraggable').draggable({
-                containment: '#content',
-                cursor: 'move',
-                snap: '#content'
-            });
+            // create some sample tool boxes
+            createTools()
+            createClipBoard()
         }
+
+        function createTools() {
+            for (var i = 0; i < 5; i++) {
+                $('<div></div>').data('number', i).attr('id', 'tool' + i).appendTo('#tools-collection').draggable({
+                    containment: '#content',
+                    stack: '#tools-collection div',
+                    cursor: 'move',
+                    revert: true
+                });
+            }
+        }
+
+        function createClipBoard() {
+            for (var i = 1; i <= 10; i++) {
+                $('<div></div>').data('number', i).appendTo('#clipboard').droppable({
+                    accept: '#tools-collection div',
+                    hoverClass: 'hovered',
+                    drop: handleToolDrop
+                });
+            }
+        }
+
+        function handleToolDrop(event, ui) {
+            ui.draggable.position({
+                of: $(this),
+                my: 'left top', 
+                at: 'left top'
+            })
+            ui.draggable.draggable('option', 'revert', false);
+        }
+
+        /*function handleToolDrop(event, ui) {    
+            // If the card was dropped to the correct slot,
+            // change the card colour, position it directly
+            // on top of the slot, and prevent it being dragged
+            // again
+
+                ui.draggable.position({ of: $(this), my: 'left top', at: 'left top' });
+                ui.draggable.draggable('option', 'revert', false);
+                correctCards++;
+
+            // If all the cards have been placed correctly then display a message
+            // and reset the cards for another go
+
+            if (correctCards == 10) {
+                $('#successMessage').show();
+                $('#successMessage').animate({
+                    left: '380px',
+                    top: '200px',
+                    width: '400px',
+                    height: '100px',
+                    opacity: 1
+                });
+            }*/
+
+
     </script>
 }
 
@@ -22,16 +76,57 @@
 
 <!-- Drag and Drop Functionality -->
 <style>
-    #makeMeDraggable {
-        width: 300px;
-        height: 300px;
-        background: red;
+    #clipboard {
+        height: 500px;
+        border: 1px solid;
+        background: #ddf;
     }
+
+    #tools-collection {
+        height: 200px;
+        border: 1px solid;
+        background: #ffd;
+    }
+
+    #clipboard, #tools-collection {
+        padding: 20px;
+        border: 2px solid #333;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        -moz-box-shadow: 0 0 .3em rgba(0, 0, 0, .8);
+        -webkit-box-shadow: 0 0 .3em rgba(0, 0, 0, .8);
+        box-shadow: 0 0 .3em rgba(0, 0, 0, .8);
+    }
+
+        #clipboard div, #tools-collection div {
+            float: left;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #333;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            margin: 0 0 0 10px;
+            background: #fff;
+        }
+
+        #tools-collection div {
+            background: #666;
+        }
+
+            #tools-collection div.ui-draggable-dragging {
+                -moz-box-shadow: 0 0 .5em rgba(0, 0, 0, .8);
+                -webkit-box-shadow: 0 0 .5em rgba(0, 0, 0, .8);
+                box-shadow: 0 0 .5em rgba(0, 0, 0, .8);
+            }
 </style>
 
-<div id="content" style="height: 400px;">
-    <div id="makeMeDraggable"></div>
+<div id="clipboard" class="droppable">
 </div>
+<div id="tools-collection">
+</div>
+
 
 <!-- Drag and Drop Functionality -->
 
