@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Magnets.Models;
-using Magnets.DAL;
 
 namespace Magnets.Controllers
 {
@@ -19,7 +18,7 @@ namespace Magnets.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Communities.ToList());
+            return View(db.Houses.ToList());
         }
 
         //
@@ -27,7 +26,7 @@ namespace Magnets.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Community community = db.Communities.Find(id);
+            House community = db.Houses.Find(id);
             if (community == null)
             {
                 return HttpNotFound();
@@ -47,11 +46,11 @@ namespace Magnets.Controllers
         // POST: /Community/Create
 
         [HttpPost]
-        public ActionResult Create(Community community)
+        public ActionResult Create(House community)
         {
             if (ModelState.IsValid)
             {
-                db.Communities.Add(community);
+                db.Houses.Add(community);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -64,7 +63,7 @@ namespace Magnets.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Community community = db.Communities.Find(id);
+            House community = db.Houses.Find(id);
             if (community == null)
             {
                 return HttpNotFound();
@@ -76,7 +75,7 @@ namespace Magnets.Controllers
         // POST: /Community/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Community community)
+        public ActionResult Edit(House community)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +91,7 @@ namespace Magnets.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Community community = db.Communities.Find(id);
+            House community = db.Houses.Find(id);
             if (community == null)
             {
                 return HttpNotFound();
@@ -106,8 +105,8 @@ namespace Magnets.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Community community = db.Communities.Find(id);
-            db.Communities.Remove(community);
+            House community = db.Houses.Find(id);
+            db.Houses.Remove(community);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

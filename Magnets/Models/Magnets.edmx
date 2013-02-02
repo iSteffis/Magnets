@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Magnets.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="MagnetsTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Magnets" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="MagnetsContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Houses" EntityType="Magnets.House" />
+          <EntitySet Name="Housemates" EntityType="Magnets.Housemate" />
+          <AssociationSet Name="HouseHousemate" Association="Magnets.HouseHousemate">
+            <End Role="House" EntitySet="Houses" />
+            <End Role="Housemate" EntitySet="Housemates" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="House">
+          <Documentation>
+            <Summary>Holds all Houses registered.</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="HouseID" />
+          </Key>
+          <Property Type="Int32" Name="HouseID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="Housemates" Relationship="Magnets.HouseHousemate" FromRole="House" ToRole="Housemate" />
+        </EntityType>
+        <EntityType Name="Housemate">
+          <Documentation>
+            <Summary>Holds all Housmates registered in House.</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="HousemateID" />
+          </Key>
+          <Property Type="Int32" Name="HousemateID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Firstname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Lastname" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="House" Relationship="Magnets.HouseHousemate" FromRole="Housemate" ToRole="House" />
+          <Property Type="Int32" Name="HouseHouseID" Nullable="false" />
+        </EntityType>
+        <Association Name="HouseHousemate">
+          <End Type="Magnets.House" Role="House" Multiplicity="1" />
+          <End Type="Magnets.Housemate" Role="Housemate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="Housemate">
+              <PropertyRef Name="HouseHouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Magnets" />
+        <Alias Key="Target" Value="Magnets.Store" />
+        <EntityContainerMapping CdmEntityContainer="MagnetsContainer" StorageEntityContainer="MagnetsTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

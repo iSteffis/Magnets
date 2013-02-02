@@ -45,6 +45,8 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -165,17 +167,39 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommunityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DAL\MagnetsContext.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Community.cs" />
-    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\House.cs">
+      <DependentUpon>Magnets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Housemate.cs">
+      <DependentUpon>Magnets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Magnets.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Magnets.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Magnets.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Magnets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Magnets.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Magnets.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Magnets.mdf" />
+    <Content Include="App_Data\Magnets_log.ldf">
+      <DependentUpon>Magnets.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -232,6 +256,23 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="Models\Magnets.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Magnets.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Magnets.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Magnets.edmx</DependentUpon>
+      <LastGenOutput>Magnets.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Magnets.edmx.diagram">
+      <DependentUpon>Magnets.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Magnets.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Magnets.edmx</DependentUpon>
+      <LastGenOutput>Magnets.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -292,11 +333,12 @@
     <Content Include="Views\Community\Edit.cshtml" />
     <Content Include="Views\Community\Delete.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
